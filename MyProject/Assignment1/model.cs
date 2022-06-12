@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
+
+
 namespace Assignment1
 {
 
@@ -40,10 +43,15 @@ namespace Assignment1
         {
 
             connection.Open();
-            string query = "Insert Into product values('"+product.proName+"','"+product.proDesc+ "'," + product.price + ")";
-            SqlCommand command = new SqlCommand(query, connection);
-            int check = command.ExecuteNonQuery();
+            //string query = "Insert Into product values('"+product.proName+"','"+product.proDesc+ "'," + product.price + ")";
+            //SqlCommand command = new SqlCommand(query, connection);
+            SqlCommand command = new SqlCommand("Insert into product values (@proName,@proDesc,@price)",connection);
+            command.Prepare();
+            command.Parameters.AddWithValue("@proName",product.proName);
+            command.Parameters.AddWithValue("@proDesc", product.proDesc);
+            command.Parameters.AddWithValue("@price", product.price);
 
+            int check = command.ExecuteNonQuery();
             if (check > 0)
             {
                 Console.WriteLine("Add Product Success !");
@@ -81,13 +89,10 @@ namespace Assignment1
         {
      
             
-            string query = "Update product Set proName = '"+product.proName+"',proDesc = '"+product.proDesc+"',price='"+product.price+"' Where id ="+product.id ;
+           
 
             connection.Open();
            // SqlCommand command = new SqlCommand(query, connection);
-
-
-
             SqlCommand command = new SqlCommand("Update product Set proName = @proName,proDesc = @proDesc,price=@price Where id = @id", connection);
             command.Prepare();
             command.Parameters.AddWithValue("@id", product.id);
