@@ -1,0 +1,136 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+
+namespace Assignment1
+{
+    class Program
+    {
+        Model model = new Model();
+        
+
+        static void Main(string[] args)
+        {
+            try
+            {
+                Program program = new Program();
+                while (true)
+                {
+                    Console.WriteLine("============================== Actions=============================");
+                    Console.WriteLine("1. Add product");
+                    Console.WriteLine("2. Delete product");
+                    Console.WriteLine("3. Update product");
+                    Console.WriteLine("4. Search Product by Name ");
+                    Console.WriteLine("5. Search product by id");
+                    Console.WriteLine("6. Show ALL");
+                    Console.WriteLine("7. Exit");
+                    int c = int.Parse(Console.ReadLine());
+                    switch (c)
+                    {
+                        case 1:
+                            program.AddProduct();
+                            break;
+                        case 2:
+                            program.DeleteProduct();
+                            break;
+                        case 3:
+                            program.UpdateProduct();
+                            break;
+                        case 4:
+                            program.SearchProductByName();
+                            break;
+                        case 5:
+                            program.SearchProductByID();
+                            break;
+                        case 6:
+                            program.ShowAll();
+                            break;
+                        case 7:
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Console.WriteLine("Please choose a number from 1-7 !");
+                            break;
+                    }
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine("?");
+            }
+            catch (FormatException ex) 
+            {
+                Console.WriteLine("Please choose a number from 1-7 !");
+            }
+        }
+
+
+        
+
+        // add product 
+        public void AddProduct()
+        {
+            Console.Write("Enter product name : ");
+            string proName = Console.ReadLine();
+            Console.Write("Enter product description : ");
+            string proDesc = Console.ReadLine();
+            Console.Write("Enter Product price : ");
+            double price = double.Parse(Console.ReadLine());
+            model.AddProduct(new Product(proName , proDesc , price));
+        }
+
+        // Delete  product
+        public void DeleteProduct()
+        {
+            Console.WriteLine("Enter product id : ");
+            int id = int.Parse(Console.ReadLine());
+            model.DeleteProduct(id);
+        }
+
+
+        //Update product
+        public void UpdateProduct()
+        {
+            Console.Write("Enter Product ID : ");
+            int id = int.Parse(Console.ReadLine());
+            Console.Write("Enter product name : ");
+            string proName = Console.ReadLine();
+            Console.Write("Enter product description : ");
+            string proDesc = Console.ReadLine();
+            Console.Write("Enter Product price : ");
+            double price = double.Parse(Console.ReadLine());
+
+            model.UpdateProduct(new Product(id, proName, proDesc, price));
+        }
+
+        // show all 
+        public void ShowAll()
+        {
+            List<Product> products = model.ShowAll();
+            for (int i = 0; i < products.Count; i++)
+            {
+                Console.WriteLine("{0}  :  {1}  :    {2}",products[i].proName,products[i].proDesc,products[i].price);
+            }
+        }
+
+        //Search   product by id
+        public void SearchProductByID()
+        {
+            Console.Write("Enter Product ID : ");
+            int id = int.Parse(Console.ReadLine());
+            model.SearchProductByID(id);
+        }
+
+
+        // search product by name 
+        public void SearchProductByName()
+        {
+            Console.Write("Enter product name :");
+            string name = Console.ReadLine();
+            model.SearchProductByName(name);
+        }
+    }
+}

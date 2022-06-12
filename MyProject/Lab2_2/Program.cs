@@ -81,6 +81,8 @@ namespace Lab2_2
             this.left = left;
         }
 
+        
+
         public virtual void DrawWindow()
         {
             Console.WriteLine("Window: drawing Window at {0}, {1}",top,left);
@@ -88,7 +90,7 @@ namespace Lab2_2
     }
     class ListBox : Window
     {
-        public ListBox(int top, int left, string contents): base(top, left) // call base constructor
+        public ListBox(int top, int left, string contents): base(top,left) // call base constructor
         {
             this.listBoxContents = contents;
         }
@@ -143,5 +145,8 @@ namespace Lab2_2
             Console.ReadLine();
         }
     }
+
+
+
 
 }
