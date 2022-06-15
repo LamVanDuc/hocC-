@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
-
+using System.Data;
+using System.Diagnostics;
 
 namespace Assignment1
 {
@@ -17,6 +18,7 @@ namespace Assignment1
         //show all product
         public List<Product> ShowAll()
         {
+            
             List<Product> listProduct = new List<Product>();
 
             string query = "select * from product";
@@ -87,18 +89,16 @@ namespace Assignment1
         //Update product 
         public void UpdateProduct(Product product)
         {
-     
-            
-           
 
             connection.Open();
            // SqlCommand command = new SqlCommand(query, connection);
             SqlCommand command = new SqlCommand("Update product Set proName = @proName,proDesc = @proDesc,price=@price Where id = @id", connection);
-            command.Prepare();
             command.Parameters.AddWithValue("@id", product.id);
             command.Parameters.AddWithValue("@proName", product.proName);
             command.Parameters.AddWithValue("@proDesc", product.proDesc);
             command.Parameters.AddWithValue("@price", product.price);
+
+            
             int check = command.ExecuteNonQuery();
             if (check > 0)
             {
@@ -115,6 +115,8 @@ namespace Assignment1
         //Search product by id
         public void SearchProductByID(int id)
         {
+            Stopwatch time = new Stopwatch();
+            time.Start();
             List<Product> productList = ShowAll();
             var fint = productList.Find(p => 
             {
@@ -130,7 +132,9 @@ namespace Assignment1
             {
                 Console.WriteLine("Product Name : {0}\nProduct Description : {1}\nProduct Price : {2}", fint.proName, fint.proDesc, fint.price);
             }
-            
+            time.Stop();
+            Console.WriteLine("----------------------- list search by id-------------------");
+            Console.WriteLine("Run for : " + time.ElapsedMilliseconds +" ms");
 
         }
 
@@ -138,6 +142,8 @@ namespace Assignment1
         // search product by name
         public void SearchProductByName(string name)
         {
+            Stopwatch time = new Stopwatch();
+            time.Start();
             List<Product> productList = ShowAll();
             var findAll = productList.FindAll(p =>
             {
@@ -160,6 +166,121 @@ namespace Assignment1
                 }
                 
             }
+            time.Stop();
+
+            Console.WriteLine("run for : " + time.ElapsedMilliseconds + " ms");
+
+        }
+
+        public void TestProcedure()
+        {
+            connection.Open();
+            SqlCommand sqlCommand = new SqlCommand("SelectProduct",connection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.ExecuteNonQuery();
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader[0]);
+                string proName = Convert.ToString(reader[1]);
+                string proDesc = Convert.ToString(reader[2]);
+                double price = Convert.ToDouble(reader[3]);
+                Console.WriteLine(" ID : {0} ProName : {1} ProDesc : {2} | price : {3}" , id , proName , proDesc , price);
+            }
+
+            connection.Close();
+        }
+
+        public void SelectProcedureByID(int id)
+
+        {
+            connection.Open();
+            SqlCommand command = new SqlCommand("SelectProductByID", connection);
+            command.Parameters.AddWithValue("@id",id);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int idproduct = Convert.ToInt32(reader[0]);
+                string proName = Convert.ToString(reader[1]);
+                string proDesc = Convert.ToString(reader[2]);
+                double price = Convert.ToDouble(reader[3]);
+                Console.WriteLine(" ID : {0} ProName : {1} ProDesc : {2} | price : {3}", idproduct, proName, proDesc, price);
+            }
+
+
+            connection.Close();
+        }
+
+        // ====================================== HashTable ===================================== 
+        public Hashtable ShowWithHasbTable()
+        {
+
+            Hashtable hashtable = new Hashtable();
+            
+            string query = "select * from product";
+            connection.Open();
+            SqlCommand command = new SqlCommand(query, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader[0]);
+                string proName = Convert.ToString(reader[1]);
+                string proDesc = Convert.ToString(reader[2]);
+                double price = Convert.ToDouble(reader[3]);
+                hashtable.Add(id, new Product(proName,proDesc, price));
+            }
+
+            connection.Close();
+            return hashtable;
+        }
+
+        public void SearchHastableById(int id)
+        {
+            Stopwatch time = new Stopwatch();
+            time.Start();
+            Hashtable hashtable = ShowWithHasbTable();
+
+            if (hashtable.ContainsKey(id))
+            {
+                Console.WriteLine(" {0}  {1} ", id, hashtable[id]);
+            }
+            else
+            {
+                Console.WriteLine("Not found key : {0}", id);
+            }
+            time.Stop();
+            Console.WriteLine("--------------------  HasHtable Search By ID ------------------");
+            Console.WriteLine("run for : " + time.ElapsedMilliseconds +" ms");
+        }
+
+
+
+        public void SearchHastableByName(string name)
+        {
+            Stopwatch time = new Stopwatch();
+            time.Start();
+            Hashtable hashtable = ShowWithHasbTable();
+
+            int count = 0;
+            foreach (Product productItem in hashtable.Values)
+            {
+                if (productItem.proName.Equals(name))
+                {
+                    count = 1;
+                    Console.Write("{0} | {1} | {2} | {3} \n", productItem.proName , productItem.proDesc , productItem.price);
+                }
+                
+            }
+            if (count == 0)
+            {
+                Console.WriteLine("Not found !");
+            }
+            time.Stop();
+
+            Console.WriteLine("--------------------  HasHtable Search By Name ------------------");
+            Console.WriteLine("run for : " + time.ElapsedMilliseconds + " ms");
         }
 
 

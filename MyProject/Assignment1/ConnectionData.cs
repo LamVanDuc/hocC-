@@ -10,7 +10,7 @@ namespace Assignment1
     {
         public SqlConnection GetDatabase()
         {
-            string connectionString = "Data source = localhost ; Initial Catalog = Dbtest ;User = lamduc ; password = 123456";
+            string connectionString = "Data source = localhost ; Initial Catalog = Dbtest ;User = lamduc ; password = 123456"; //Integrated security = true
             SqlConnection connect = new SqlConnection(connectionString);           
                 //Console.WriteLine("connection failed !");
                 return connect;

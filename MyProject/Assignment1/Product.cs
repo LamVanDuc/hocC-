@@ -8,9 +8,6 @@ namespace Assignment1
 {
     class Product
     {
-        private object v1;
-        private object v2;
-        private object v3;
 
         public int id { get; set; }
         public string proName { get; set; }
@@ -30,6 +27,10 @@ namespace Assignment1
             this.proName = proName;
             this.proDesc = proDesc;
             this.price = price;
+        }
+        public override string ToString()
+        {
+            return " | ProName : "+ proName +" | ProDesc : "+proDesc + " | price : "+price;
         }
     }
 }
