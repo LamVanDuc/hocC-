@@ -269,11 +269,11 @@ namespace Assignment1
                 if (productItem.proName.Equals(name))
                 {
                     count = 1;
-                    Console.Write("{0} | {1} | {2} | {3} \n", productItem.proName , productItem.proDesc , productItem.price);
+                    Console.WriteLine("{0} | {1} | {2} ", productItem.proName , productItem.proDesc , productItem.price);
                 }
                 
             }
-            if (count == 0)
+            if (count != 0)
             {
                 Console.WriteLine("Not found !");
             }

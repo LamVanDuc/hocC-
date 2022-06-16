@@ -216,7 +216,7 @@ namespace Assignment1
 
         public void SearchHastableByName()
         {
-            Console.WriteLine("Enter product name : ");
+            Console.Write("Enter product name : ");
             string name = Console.ReadLine();
 
             model.SearchHastableByName(name);
