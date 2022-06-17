@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab6_ConnectSqlServer", "La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment1", "Assignment1\Assignment1.csproj", "{AA4C6A94-8D67-45F9-8D2F-1D8A811BB45B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab06", "Lab06\Lab06.csproj", "{724F6286-AA23-4C2E-A1EB-75C4604139FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab07", "Lab07\Lab07.csproj", "{F1260926-55CF-4E91-8025-FA5AA88D0F6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +109,14 @@ Global
 		{AA4C6A94-8D67-45F9-8D2F-1D8A811BB45B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA4C6A94-8D67-45F9-8D2F-1D8A811BB45B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA4C6A94-8D67-45F9-8D2F-1D8A811BB45B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724F6286-AA23-4C2E-A1EB-75C4604139FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724F6286-AA23-4C2E-A1EB-75C4604139FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724F6286-AA23-4C2E-A1EB-75C4604139FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724F6286-AA23-4C2E-A1EB-75C4604139FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1260926-55CF-4E91-8025-FA5AA88D0F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1260926-55CF-4E91-8025-FA5AA88D0F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1260926-55CF-4E91-8025-FA5AA88D0F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1260926-55CF-4E91-8025-FA5AA88D0F6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

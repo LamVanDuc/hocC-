@@ -36,7 +36,6 @@ namespace Assignment1
 
             connection.Close();
             return listProduct;
-            listProduct.Clear();
         }
         
         
