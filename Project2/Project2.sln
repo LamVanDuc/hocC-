@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQ", "LINQ\LINQ.csproj", "{2E2AAF66-9F39-4BF3-A2C8-06554FEF56A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQ02", "LINQ02\LINQ02.csproj", "{9BE50290-316F-4255-8B9A-6EE766CD222F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaiTap01", "BaiTap01\BaiTap01.csproj", "{4460F4DF-95F0-447C-AE47-4785284294F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2E2AAF66-9F39-4BF3-A2C8-06554FEF56A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E2AAF66-9F39-4BF3-A2C8-06554FEF56A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E2AAF66-9F39-4BF3-A2C8-06554FEF56A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE50290-316F-4255-8B9A-6EE766CD222F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE50290-316F-4255-8B9A-6EE766CD222F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE50290-316F-4255-8B9A-6EE766CD222F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE50290-316F-4255-8B9A-6EE766CD222F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4460F4DF-95F0-447C-AE47-4785284294F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4460F4DF-95F0-447C-AE47-4785284294F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4460F4DF-95F0-447C-AE47-4785284294F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4460F4DF-95F0-447C-AE47-4785284294F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
