@@ -14,16 +14,46 @@ namespace BaiTap01
         public static List<Employee> employees = new List<Employee>();
         static void Main(string[] args)
         {
-          
+            Program pro = new Program();
                 InitProject();
                 InitEmployee();
 
+            try
+            {
 
-                foreach (var item in employees)
+                while (true)
                 {
-                    Console.WriteLine(item.EmployeeId + " name : " + item.EmployeeName + " project ID" + item.ProjectId);
-                }
 
+                    Console.WriteLine("1, Employee join Project");
+                    Console.WriteLine("2, ");
+                    Console.WriteLine("3, ");
+                    Console.WriteLine("4, ");
+                    Console.WriteLine("5, ");
+                    Console.WriteLine("6, ");
+                    int ch = int.Parse(Console.ReadLine());
+                    switch (ch)
+                    {
+                        case 1:
+                            pro.EmployeeJoinProject();
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }catch(Exception ex)
+            {
+                Console.WriteLine("Da say ra loi : "+ex.Message);
+            }
 
 
 
@@ -31,6 +61,14 @@ namespace BaiTap01
 
 
             Console.ReadLine();
+        }
+        public void EmployeeJoinProject()
+        {
+            var employeeJoin = employees.Join(projects, emp => emp.ProjectId, pro => pro.ProjectId, (emp, pro) => new { emp.EmployeeName, pro.ProjectName });
+            foreach (var item in employeeJoin)
+            {
+                Console.WriteLine(item.EmployeeName +"  Project Name : "+ item.ProjectName);
+            }
         }
 
         public static void InitEmployee()
