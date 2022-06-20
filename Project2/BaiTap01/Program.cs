@@ -23,28 +23,30 @@ namespace BaiTap01
 
                 while (true)
                 {
-
-                    Console.WriteLine("1, Employee join Project");
-                    Console.WriteLine("2, ");
-                    Console.WriteLine("3, ");
-                    Console.WriteLine("4, ");
-                    Console.WriteLine("5, ");
-                    Console.WriteLine("6, ");
+                    Console.WriteLine("===========================================================");
+                    Console.WriteLine("  1, Employee join Project");
+                    Console.WriteLine("  2, Search employee by name or Project Name :");
+                    Console.WriteLine("  3, Show ALL");
+                    Console.WriteLine("  0, Exit !");
+                    Console.Write("Choice : ");
                     int ch = int.Parse(Console.ReadLine());
+                    Console.WriteLine("--------------------------------------");
                     switch (ch)
                     {
                         case 1:
                             pro.EmployeeJoinProject();
                             break;
                         case 2:
+                            Console.Write("Enter Employee Name or project Name :");
+                            string name = Console.ReadLine();
+                            pro.SearchByName(name);
                             break;
                         case 3:
+                            pro.ShowAll();
                             break;
-                        case 4:
-                            break;
-                        case 5:
-                            break;
-                        case 6:
+                        case 0:
+                          
+                            Environment.Exit(0);
                             break;
                         default:
                             break;
@@ -54,21 +56,64 @@ namespace BaiTap01
             {
                 Console.WriteLine("Da say ra loi : "+ex.Message);
             }
-
-
-
-
-
-
             Console.ReadLine();
         }
-        public void EmployeeJoinProject()
+
+
+        public void ShowAll()
         {
-            var employeeJoin = employees.Join(projects, emp => emp.ProjectId, pro => pro.ProjectId, (emp, pro) => new { emp.EmployeeName, pro.ProjectName });
-            foreach (var item in employeeJoin)
+            var query = EmployeeJoinProject();
+            Console.WriteLine(string.Format("   {0,-9} {1}", "Employee", "Project Name"));
+            Console.WriteLine("--------------------------------------------");
+            foreach (var item in query)
             {
-                Console.WriteLine(item.EmployeeName +"  Project Name : "+ item.ProjectName);
+                Console.WriteLine(string.Format("  {0,-9} {1}",item.EmployeeName , item.ProjectName));
+
             }
+            Console.WriteLine("-------------------- End --------------------");
+        }
+
+
+        public void SearchByName(string name)
+        {
+            int count = 0;
+            var join = EmployeeJoinProject();
+
+            Console.WriteLine(string.Format("   {0,-9} {1}", "Employee", "Project Name"));
+            Console.WriteLine("--------------------------------------------");
+            foreach (var item in join)
+            {
+                
+                if (item.EmployeeName.Contains(name) || item.ProjectName.Contains(name))
+                {
+                    count = 1;
+                    Console.WriteLine(string.Format("   {0,-9} {1}",item.EmployeeName,item.ProjectName));
+                }
+            }
+            if (count == 0)
+            {
+                Console.WriteLine(string.Format("{0} not found !",name));
+            }
+            Console.WriteLine("-------------------- End --------------------");
+        }
+
+
+
+        public dynamic  EmployeeJoinProject()
+        {
+           var  employeeJoin = employees.Join(projects, emp => emp.ProjectId, pro => pro.ProjectId, (emp, pro) => 
+                           new { emp.EmployeeName, pro.ProjectName });
+            
+            var employee = employeeJoin.OrderBy(e => e.EmployeeName);
+         
+           // var query = from emp in employees
+                        //join pro in projects on emp.ProjectId equals pro.ProjectId
+                        //select new{
+                        //    pro.ProjectName,
+                        //    emp.EmployeeName
+                        //  };
+
+            return employee;
         }
 
         public static void InitEmployee()
@@ -106,7 +151,11 @@ namespace BaiTap01
     }
 
     class Employee
+
     {
+        
+
+        
         public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public int ProjectId { get; set; }
